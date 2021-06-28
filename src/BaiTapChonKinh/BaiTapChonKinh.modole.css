@@ -1,0 +1,32 @@
+.backgroundColor {
+    background-color: rgb(0 0 0 / 30%);
+}
+.height{
+    height:100%;
+    width:50%;
+}
+.kinh{
+    top: 26%;
+    left: 61%;
+    width: 22%;
+    
+}
+.maxKinh{
+    max-width: 15%;
+    margin-right: 10px;
+    border-top: 2px solid rgba(0, 0, 0, 0.315) !important;
+    border-right: 2px solid rgba(0, 0, 0, 0.315) !important;
+}
+.padding{
+    padding-left: 50px;
+    
+    margin: 0px 200px;
+    background-color:rgba(0, 0, 0, 0.664);
+}
+.text{
+    top: 69%;
+    left: 50%;
+    background-color: rgba(255, 127, 80, 0.445);
+    font-size: auto;
+    width:44%;
+}

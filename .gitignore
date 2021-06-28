@@ -1,0 +1,3 @@
+
+#loại bỏ foder node-module không đưa lên git  (vì quá nặng có thể dùng lệnh npm install để cài lại dựa vào node module
+/node_modules
