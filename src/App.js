@@ -14,6 +14,7 @@ import DemoProps from './Props/DemoProps';
 import DemoXemChiTiet from './DemoXemChiTiet/DemoXemChiTiet';
 import ProductList from './ProductList/ProductList';
 import BaiTapChonKinh from './BaiTapChonKinh/BaiTapChonKinh';
+import ExerciseCarStore from './BaiTapXemChiTietXe/ExerciseCarStore';
 
 function App() { //Component gốc của ứng dụng
   const arrProduct=[
@@ -148,15 +149,16 @@ function App() { //Component gốc của ứng dụng
         <BaiTapComponent/> */}
         {/* <BaiTapLayoutBoostrap/> */}
         {/* <Databinding/> */}
-        <DataBindingReactFunc/>
-        <HandleEvent/>
-        <RenderWithState/>
-        <BaiTapChonXe/>
-        <RenderWithMap/>
-        <DemoProps/>
+        {/* <DataBindingReactFunc/> */}
+        {/* <HandleEvent/> */}
+        {/* <RenderWithState/> */}
+        {/* <BaiTapChonXe/> */}
+        {/* <RenderWithMap/> */}
+        {/* <DemoProps/> */}
         <DemoXemChiTiet/>
         {/* <ProductList arrProduct={arrProduct}/> */}
-        <BaiTapChonKinh/>
+        {/* <BaiTapChonKinh/> */}
+        {/* <ExerciseCarStore/> */}
 
     </div>
   );

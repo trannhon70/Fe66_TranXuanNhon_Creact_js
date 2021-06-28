@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import SanPham from './SanPham';
+import Cart from './Cart';
 export default class DemoXemChiTiet extends Component {
     mangSanPham = [
         { "maSP": 1, "tenSP": "VinSmart Live", "manHinh": "AMOLED, 6.2, Full HD+", "heDieuHanh": "Android 9.0 (Pie)", "cameraTruoc": "20 MP", "cameraSau": "Chính 48 MP & Phụ 8 MP, 5 MP", "ram": "4 GB", "rom": "64 GB", "giaBan": 5700000, "hinhAnh": "./img/vsphone.jpg" },
@@ -8,13 +9,74 @@ export default class DemoXemChiTiet extends Component {
     ]
 
     state = {
-        sanPhamChiTiet : { "maSP": 3, "tenSP": "Iphone XS Max", "manHinh": "OLED, 6.5, 1242 x 2688 Pixels", "heDieuHanh": "iOS 12", "cameraSau": "Chính 12 MP & Phụ 12 MP", "cameraTruoc": "7 MP", "ram": "4 GB", "rom": "64 GB", "giaBan": 27000000, "hinhAnh": "./img/applephone.jpg" }
+        sanPhamChiTiet: { "maSP": 3, "tenSP": "Iphone XS Max", "manHinh": "OLED, 6.5, 1242 x 2688 Pixels", "heDieuHanh": "iOS 12", "cameraSau": "Chính 12 MP & Phụ 12 MP", "cameraTruoc": "7 MP", "ram": "4 GB", "rom": "64 GB", "giaBan": 27000000, "hinhAnh": "./img/applephone.jpg" },
+        gioHang: [
+            // {maSP:1,tenSP:'I phone X',soLuong:2,giaBan:1000,hinhAnh:'./img/applephone.jpg'},
+        ]
+    }
+    tangGiamSoLuong = (maSP, soLuong) => {
+        console.log(maSP, soLuong);
+        let gioHangCapNhat = [...this.state.gioHang];
+
+        //kiểm tra sp có trong giỏ hàng không 
+        let spGH = gioHangCapNhat.find(spGH => spGH.maSP === maSP);
+        if (spGH) {
+            spGH.soLuong += soLuong;
+            if (spGH.soLuong < 1) {
+                alert('số lượng tối thiểu là 1');
+                spGH.soLuong -= soLuong;
+            }
+        }
+        this.setState({
+            gioHang: gioHangCapNhat
+        })
+    }
+    //hàm xóa giỏ hàng đặt tại nơi chứa state giỏ hàng 
+    xoaGioHang = (maSP) => {
+        console.log('sanPhamCLick', maSP);
+        //từ mã SP tìm ra sản phẩm trong mảng =>xóa
+        let gioHangCapNhat = [...this.state.gioHang];
+        let index = gioHangCapNhat.findIndex(spGH => spGH.maSP === maSP);
+        //tìm thấy sp click trong giỏ hàng 
+        if (index !== -1) {
+            gioHangCapNhat.splice(index, 1);
+        }
+        //gọi hà setState
+        this.setState({
+            gioHang: gioHangCapNhat
+        })
+    }
+
+    themGioHang = (SpClick) => {
+        console.log('SpClick', SpClick);
+        //Thuộc tính số lượng cho sản phẩm spClick
+        let spGioHang = { ...SpClick, soLuong: 1 };
+        //khi người dung Click vào => thêm sản phẩm được Click vào mảng giỏ hàng 
+        let gioHangCapNhat = [...this.state.gioHang];
+
+        //tìm sản phẩm được click có trong giỏ hàng hay chưa 
+        let sp = gioHangCapNhat.find(spGH => spGH.maSP === spGioHang.maSP);
+
+        if (sp) {//spClick có trong giỏ hàng
+            sp.soLuong += 1;//tăng số lượng 
+        }
+        else {
+            //thêm sản phẩm được click vào giỏ hàng 
+            gioHangCapNhat.push(spGioHang);
+        }
+        console.log('giỏ hang sao khi cập nhật', gioHangCapNhat);
+        // Gọi hàm setState cập nhật lại giỏ hàng và render lại giao diện 
+        this.setState({
+            gioHang: gioHangCapNhat
+        })
+        //chắc chắn hàm này sẽ gọi setState
+        //this.setState
     }
 
     renderSanPham = () => {
-        return this.mangSanPham.map((sanPham,index) => {
+        return this.mangSanPham.map((sanPham, index) => {
             return <div className="col-4" key={index}>
-                <SanPham sp={sanPham} xemChiTiet={this.xemChiTiet} />
+                <SanPham sp={sanPham} xemChiTiet={this.xemChiTiet} themGioHang={this.themGioHang} />
                 {/* <div className="card bg-dark text-white">
                     <img src={sanPham.hinhAnh} alt="..."  height={300} />
                     <div className="card-body">
@@ -30,7 +92,7 @@ export default class DemoXemChiTiet extends Component {
         })
     }
     xemChiTiet = (sanPhamDuocClick) => {
-        console.log('sanPhamCLick',sanPhamDuocClick)
+        console.log('sanPhamCLick', sanPhamDuocClick)
 
         // Thay đổi sản phẩm chi tiết trong state = sản phẩm được click
         this.setState({
@@ -39,14 +101,26 @@ export default class DemoXemChiTiet extends Component {
 
     }
 
-
+    tinhTongSoLuong=()=>{
+        let tongSoLuong = this.state.gioHang.reduce((tong,spGH)=>{
+            return tong +=spGH.soLuong
+        },0);
+        return tongSoLuong;
+    }
 
     render() {
 
-        let {sanPhamChiTiet} = this.state;
+        let { sanPhamChiTiet } = this.state;
         return (
             <div className="container">
+                <Cart gioHang={this.state.gioHang} xoaGioHang={this.xoaGioHang} tangGiamSoLuong={this.tangGiamSoLuong}></Cart>
                 <h3 className="text-center">Danh sách sản phẩm</h3>
+                <div className="text-right">
+                    <span className="btn " data-toggle="modal" data-target="#modelId">
+                        Giỏ hàng ({this.tinhTongSoLuong()})
+                    </span>
+
+                </div>
                 <div className="row">
                     {this.renderSanPham()}
                 </div>
@@ -54,7 +128,7 @@ export default class DemoXemChiTiet extends Component {
                 <div className="row mt-2">
                     <div className="col-4">
                         <h3>{sanPhamChiTiet.tenSP}</h3>
-                        <img src={sanPhamChiTiet.hinhAnh}  height={300} alt="..." />
+                        <img src={sanPhamChiTiet.hinhAnh} height={300} alt="..." />
                     </div>
                     <div className="col-8">
                         <h3 className="text-center">Thông số kỹ thuật</h3>
