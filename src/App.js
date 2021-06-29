@@ -155,9 +155,9 @@ function App() { //Component gốc của ứng dụng
         {/* <BaiTapChonXe/> */}
         {/* <RenderWithMap/> */}
         {/* <DemoProps/> */}
-        <DemoXemChiTiet/>
+        {/* <DemoXemChiTiet/> */}
         {/* <ProductList arrProduct={arrProduct}/> */}
-        {/* <BaiTapChonKinh/> */}
+        <BaiTapChonKinh/>
         {/* <ExerciseCarStore/> */}
 
     </div>
