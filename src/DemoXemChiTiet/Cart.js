@@ -11,7 +11,7 @@ export default class Cart extends Component {
                 <td>{spGH.maSP}</td>
                 <td>{spGH.tenSP}</td>
                 <td><img src={spGH.hinhAnh} with={50} height={50} /></td>
-                <td>{spGH.giaBan}</td>
+                <td>{spGH.giaBan.toLocaleString()}</td>
 
                 <td>
                     <button className="btn btn-primary mr-2" onClick={() => {

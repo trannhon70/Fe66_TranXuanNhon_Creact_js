@@ -12,7 +12,7 @@ export default class SanPham extends Component {
                 <img src={sp.hinhAnh} alt="..." height={300} />
                 <div className="card-body">
                     <p>{sp.tenSP}</p>
-                    <p>{sp.giaBan}</p>
+                    <p>{sp.giaBan.toLocaleString()}</p>
                     <button onClick={() => {
                         //Định nghĩa sự kiện click trên mỗi sản phẩm
                         this.props.xemChiTiet(sp);
@@ -21,7 +21,7 @@ export default class SanPham extends Component {
 
                     <button onClick={()=>{
                         this.props.themGioHang(sp)
-                    }} className="ml-2 btn-primary " >thêm giỏ hàng</button>
+                    }} className="btn btn-primary ml-2" >thêm giỏ hàng</button>
                 </div>
             </div>
         )
