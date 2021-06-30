@@ -147,7 +147,7 @@ function App() { //Component gốc của ứng dụng
         {/* <DemoComponent/>
         <DemoFComponent/>
         <BaiTapComponent/> */}
-        <BaiTapLayoutBoostrap/>
+        {/* <BaiTapLayoutBoostrap/> */}
         {/* <Databinding/> */}
         {/* <DataBindingReactFunc/> */}
         {/* <HandleEvent/> */}
@@ -158,7 +158,7 @@ function App() { //Component gốc của ứng dụng
         {/* <DemoXemChiTiet/> */}
         {/* <ProductList arrProduct={arrProduct}/> */}
         {/* <BaiTapChonKinh/> */}
-        {/* <ExerciseCarStore/> */}
+        <ExerciseCarStore/>
 
     </div>
   );
